@@ -1,0 +1,11 @@
+{
+  "name": "es2016-demo",
+  "version": "1.0.0",
+  "description": "Demo of using Babel's ES2016 preset",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steve Konves",
+  "license": "MIT"
+}
