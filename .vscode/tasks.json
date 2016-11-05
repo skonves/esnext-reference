@@ -3,13 +3,13 @@
   "command": "npm",
   "isShellCommand": true,
   "args": ["run"],
-  "showOutput": "silent",
+  "showOutput": "never",
   "tasks": [
     {
       "taskName": "compile",
       "isBuildCommand": false,
       "isTestCommand": false,
-      "showOutput": "silent",
+      "showOutput": "never",
       "args": []
     }
   ]
