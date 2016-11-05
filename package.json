@@ -4,7 +4,7 @@
   "description": "Demo of using Babel's ES2016 preset",
   "main": "index.js",
   "scripts": {
-    "compile": "rm -rf .compiled && mkdir .compiled && babel index.js --out-dir .compiled",
+    "compile": "rm -rf .compiled && mkdir .compiled && babel src --out-dir .compiled",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Steve Konves",
@@ -13,6 +13,7 @@
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-es2015-destructuring": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2016": "^6.16.0"
   }
 }
