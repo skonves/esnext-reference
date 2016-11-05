@@ -4,6 +4,7 @@
   "description": "Demo of using Babel's ES2016 preset",
   "main": "index.js",
   "scripts": {
+    "compile": "rm -rf .compiled && mkdir .compiled && babel index.js --out-dir .compiled",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Steve Konves",
