@@ -23,10 +23,7 @@
 		"dot-notation": "error",
 		"no-whitespace-before-property": 2,
 		"semi": "error",
-		"quotes": [
-			"error",
-			"single"
-		],
+		"quotes": [ "error", "single" ],
 
 		"no-multiple-empty-lines": ["error", {"max": 1}],
 		"block-spacing": ["error", "always"],
