@@ -28,5 +28,3 @@ if (true) {
 var t = d => { return x; };
 
 const asdfasdf = [4, 5, 6, 7];
-
-
