@@ -9,6 +9,7 @@ const asdf = { c, 'f-f': x };
 
 asdf['f-f'];
 asdf.c;
+asdf.c;
 
 show({ ...x, c });
 
@@ -18,7 +19,7 @@ if (true) {
 
 var t = d => { return x; };
 
-const asdfasdf = [ 4, 5, 6, 7 ];
+const asdfasdf = [4, 5, 6, 7];
 
 const show = function ({ a, b, c, d }) {
 	console.log(a);
