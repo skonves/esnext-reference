@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/.compiled/index.js",
+            "program": "${workspaceRoot}/.compiled/app.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
