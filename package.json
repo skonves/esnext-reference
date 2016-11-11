@@ -1,7 +1,7 @@
 {
-  "name": "es2016-demo",
+  "name": "esnext-reference",
   "version": "1.0.0",
-  "description": "Demo of using Babel's ES2016 preset",
+  "description": "Reference projects for ES7/8+ code",
   "main": "index.js",
   "scripts": {
     "compile": "rm -rf .compiled && mkdir .compiled && babel src --out-dir .compiled",
