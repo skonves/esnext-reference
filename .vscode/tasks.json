@@ -6,7 +6,7 @@
   "showOutput": "never",
   "tasks": [
     {
-      "taskName": "compile",
+      "taskName": "rebuild",
       "isBuildCommand": false,
       "isTestCommand": false,
       "showOutput": "never",

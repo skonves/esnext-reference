@@ -8,11 +8,11 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/.compiled/app.js",
+            "program": "${workspaceRoot}/.compiled/server/server.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "compile",
+            "preLaunchTask": "rebuild",
             "runtimeExecutable": null,
             "runtimeArgs": ["--nolazy"],
             "env": {
