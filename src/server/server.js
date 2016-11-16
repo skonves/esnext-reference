@@ -21,6 +21,7 @@ const finalCreateStore = applyMiddleware(/*promiseMiddleware*/)( createStore );
 const app = express();
 
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
+app.use('/dist', express.static(path.join(__dirname, '../dist')));
 
 // server rendering
 app.use( ( req, res, next ) => {
@@ -92,7 +93,7 @@ function renderFullPage(html, initialState) {
 	  <body>
 	  <div class="container">${html}</div>
 		<script>window.$REDUX_STATE = ${initialState}</script>
-		<script src="/static/bundle.js"></script>
+		<script src="/dist/bundle.js"></script>
 	  </body>
 	</html>
 	`;
