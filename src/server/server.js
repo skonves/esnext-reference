@@ -16,7 +16,7 @@ import combinedReducers from '../common/reducers';
 
 import fetchComponentData from '../common/utils/fetchComponentData';
 
-const finalCreateStore = applyMiddleware(/*promiseMiddleware*/)( createStore );
+//const finalCreateStore = applyMiddleware(/*promiseMiddleware*/)( createStore );
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use('/dist', express.static(path.join(__dirname, '../dist')));
 // server rendering
 app.use( ( req, res, next ) => {
 
-	const store = finalCreateStore(combinedReducers);
+	const store = createStore(combinedReducers);
 
 	// react-router
 	match( { routes, location: req.url }, ( error, redirectLocation, renderProps ) => {
@@ -88,7 +88,6 @@ function renderFullPage(html, initialState) {
 	  <head>
 		<title>Universal Redux Example</title>
 		<link rel="shortcut icon" type="image/png" href="assets/images/react.png">
-		<link rel="stylesheet" href="/assets/css/uikit.almost-flat.min.css">
 	  </head>
 	  <body>
 	  <div class="container">${html}</div>

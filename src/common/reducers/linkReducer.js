@@ -1,8 +1,5 @@
 import actionTypes from '../constants/actionTypes';
-
-const initialState = {
-	links: []
-};
+import defaultState from '../state';
 
 function addLink(state, action) {
 	let newState = { ...state };
@@ -13,7 +10,7 @@ function addLink(state, action) {
 	return newState;
 }
 
-export default function (state = initialState, action) {
+export default function (state = defaultState, action) {
 	switch (action.type) {
 		case actionTypes.ADD_LINK:
 			return addLink(state, action);

@@ -1,4 +1,6 @@
+import React, { Component } from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { render } from 'react-dom';
 import { Router, Route, RouterContext, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import combinedReducers from '../common/reducers';

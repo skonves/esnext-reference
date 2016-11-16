@@ -11,6 +11,7 @@ export default class TodoApp extends Component {
 			<div>
 				<h1>Hello World</h1>
                 {this.props.asdf}
+                {this.props.nm}
 				<span>{this.props.message}</span>
 			</div>
 		);
