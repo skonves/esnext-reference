@@ -1,5 +1,4 @@
 import actionTypes from '../constants/actionTypes';
-import defaultState from '../state';
 
 function setNumber(state, action) {
 	let newState = { ...state };
@@ -25,7 +24,7 @@ function decrement(state, action) {
 	return newState;
 }
 
-export default function (state = defaultState, action) {
+export default function (state = { number: 1337 }, action) {
 	switch (action.type) {
 		case actionTypes.SET_NUMBER:
 			return setNumber(state, action);
