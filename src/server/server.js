@@ -11,12 +11,11 @@ import routes from '../common/routes/routing';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-//import promiseMiddleware from '../common/middlewares/PromiseMiddleware';
 import combinedReducers from '../common/reducers';
 
-import fetchComponentData from '../common/utils/fetchComponentData';
+import thunk from 'redux-thunk';
 
-//const finalCreateStore = applyMiddleware(/*promiseMiddleware*/)( createStore );
+import fetchComponentData from '../common/utils/fetchComponentData';
 
 const app = express();
 
@@ -26,7 +25,7 @@ app.use('/dist', express.static(path.join(__dirname, '../dist')));
 // server rendering
 app.use((req, res, next) => {
 
-	const store = createStore(combinedReducers);
+	const store = createStore(combinedReducers, applyMiddleware(thunk));
 
 	// react-router
 	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
