@@ -24,24 +24,24 @@ app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 
 // server rendering
-app.use( ( req, res, next ) => {
+app.use((req, res, next) => {
 
 	const store = createStore(combinedReducers);
 
 	// react-router
-	match( { routes, location: req.url }, ( error, redirectLocation, renderProps ) => {
+	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
 		if (error) {
-			return res.status(500).send( error.message );
+			return res.status(500).send(error.message);
 		}
 
 		if (redirectLocation) {
-			return res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
+			return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 		}
 
 		if (renderProps == null) {
 			// return next('err msg: route not found'); // yield control to next middleware to handle the request
-			return res.status(404).send( 'Not found' );
+			return res.status(404).send('Not found');
 		}
 
 		// console.log( '\nserver > renderProps: \n', require('util').inspect( renderProps, false, 1, true) )
@@ -53,31 +53,31 @@ app.use( ( req, res, next ) => {
 		// hence ensuring all data needed was fetched before proceeding
 		//
 		// renderProps: contains all necessary data, e.g: routes, router, history, components...
-		fetchComponentData( store.dispatch, renderProps.components, renderProps.params)
+		fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
 
-		.then( () => {
+			.then(() => {
 
-			const initView = renderToString((
-				<Provider store={store}>
-				  <RouterContext {...renderProps} />
-				</Provider>
-			));
+				const initView = renderToString((
+					<Provider store={store}>
+						<RouterContext {...renderProps} />
+					</Provider>
+				));
 
-			// console.log('\ninitView:\n', initView);
+				// console.log('\ninitView:\n', initView);
 
-			let state = JSON.stringify( store.getState() );
-			// console.log( '\nstate: ', state )
+				let state = JSON.stringify(store.getState());
+				// console.log( '\nstate: ', state )
 
-			let page = renderFullPage( initView, state );
-			// console.log( '\npage:\n', page );
+				let page = renderFullPage(initView, state);
+				// console.log( '\npage:\n', page );
 
-			return page;
+				return page;
 
-		})
+			})
 
-		.then( page => res.status(200).send(page) )
+			.then(page => res.status(200).send(page))
 
-		.catch( err => res.end(err.message) );
+			.catch(err => res.end(err.message));
 	});
 });
 
@@ -111,9 +111,9 @@ app.use((err, req, res, next) => {
 });
 
 process.on('uncaughtException', evt => {
-	console.log( 'uncaughtException: ', evt );
+	console.log('uncaughtException: ', evt);
 });
 
-app.listen(3000, function (){
+app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
