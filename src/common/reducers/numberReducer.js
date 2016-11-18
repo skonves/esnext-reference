@@ -24,6 +24,22 @@ function decrement(state, action) {
 	return newState;
 }
 
+function loadNumber(state, action) {
+	let newState = { ...state };
+
+	newState.number = (newState.number || 0) - 1;
+
+	return newState;
+}
+
+function setLoadingMessage(state, action) {
+	let newState = { ...state };
+
+	newState.message = action.payload.message;
+
+	return newState;
+}
+
 export default function (state = { number: 1337 }, action) {
 	switch (action.type) {
 		case actionTypes.SET_NUMBER:
@@ -32,6 +48,10 @@ export default function (state = { number: 1337 }, action) {
 			return increment(state, action);
 		case actionTypes.DECREMENT_NUMBER:
 			return decrement(state, action);
+		case actionTypes.LOAD_NUMBER:
+			return loadNumber(state, action);
+		case actionTypes.SET_LOADING_MESSAGE:
+			return setLoadingMessage(state, action);
 		default:
 			return state;
 	}
