@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { loadNumber, increment, decrement } from '../actions/numberActions';
+import { increment, decrement, loadNumber, saveNumber } from '../actions/numberActions';
 
 class NumberManager extends Component {
 
@@ -15,7 +15,8 @@ class NumberManager extends Component {
 				<span>the number is {this.props.number}</span>
 				<button onClick={()=>this.props.increment()}>increment</button>
 				<button onClick={()=>this.props.decrement()}>decrement</button>
-				<button onClick={()=>this.props.loadNumber(555)}>load</button>
+				<button onClick={()=>this.props.saveNumber(this.props.number)}>save</button>
+				<button onClick={()=>this.props.loadNumber()}>load saved</button>
 				<span>{this.props.message}</span>
 			</div>
 		);
@@ -33,14 +34,17 @@ function mapStateToProps({ numberReducer }, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
 	return {
-		loadNumber: number => {
-			dispatch(loadNumber(number));
-		},
 		increment: () => {
 			dispatch(increment());
 		},
 		decrement: () => {
 			dispatch(decrement());
+		},
+		loadNumber: () => {
+			dispatch(loadNumber());
+		},
+		saveNumber: number => {
+			dispatch(saveNumber(number));
 		}
 	};
 }

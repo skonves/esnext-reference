@@ -1,6 +1,8 @@
 import actionTypes from '../constants/actionTypes';
 import Action from '../utils/Action';
 
+import { getRepository } from '../utils/repository';
+
 export function setNumber(number) {
 	return {
 		type: actionTypes.SET_NUMBER,
@@ -27,12 +29,27 @@ export function decrement() {
 	};
 }
 
-export function loadNumber(number) {
+export function saveNumber(number) {
+	return dispatch => {
+		dispatch(setLoadingMessage('saving ...'));
+
+		getRepository()
+			.numbers('save', { number })
+			.then(value => {
+				dispatch(setLoadingMessage());
+			});
+	};
+}
+
+export function loadNumber() {
 	return dispatch => {
 		dispatch(setLoadingMessage('loading ...'));
-		setTimeout(() => {
-			dispatch(setLoadingMessage());
-			dispatch(setNumber(number));
-		}, 3500);
+
+		getRepository()
+			.numbers('load')
+			.then(value => {
+				dispatch(setLoadingMessage());
+				dispatch(setNumber(value));
+			});
 	};
 }

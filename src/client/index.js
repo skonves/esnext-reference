@@ -7,6 +7,13 @@ import combinedReducers from '../common/reducers';
 import routes from '../common/routes/routing';
 import thunk from 'redux-thunk';
 
+import { createRepository } from '../common/utils/repository';
+import numberStrategy from './strategies/numbers';
+
+createRepository({
+	numbers: numberStrategy
+});
+
 let state = null;
 
 if (window.$REDUX_STATE) {

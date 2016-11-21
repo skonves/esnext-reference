@@ -1,6 +1,7 @@
 import fs from 'fs';
 import express from 'express';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -17,10 +18,42 @@ import thunk from 'redux-thunk';
 
 import fetchComponentData from '../common/utils/fetchComponentData';
 
+import { createRepository, getRepository } from '../common/utils/repository';
+import numberStrategy from './strategies/numbers';
+
+createRepository({
+	numbers: numberStrategy
+});
+
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
+
+app.get('/api/number', (req, res) => {
+	getRepository()
+		.numbers('load')
+		.then(value => {
+			res.send({ number: value });
+		})
+		.catch(reason => {
+			res.status(500).send({ reason });
+		});
+});
+
+app.put('/api/number', (req, res) => {
+	const number = req.body.number;
+	getRepository()
+		.numbers('save', { number })
+		.then(value => {
+			res.sendStatus(204);
+		})
+		.catch(reason => {
+			res.status(500).send({ reason });
+		});
+});
 
 // server rendering
 app.use((req, res, next) => {
