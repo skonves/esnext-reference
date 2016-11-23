@@ -59,6 +59,7 @@ provides access to the state within the Redux store.
 
 
 The pattern used in this project for the body of such a function is:
+
 1. Call an Action Creator and then dispatch the action.  (The reducer for this action
 can do things like set an `isLoading` property within the state to `true`.)
 1. Call some asynchronous function

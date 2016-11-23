@@ -6,12 +6,12 @@ the server means that both the client and server can run code written in the sam
 language.  This allows for an "Isomorphic" architecture in which the client- and
 server-side code is largely one and the same providing several benefits:
 
-* **Code reuse** - Logic does not have to be independently implemented in both the
-client and server code.  Less code means less development and maintenance costs.
 * **Performance** - Page rendering happens using the same logic as the
 frontend before the page is even served.  This improves performance by allowing
 for the first paint to happen before Javascript is loaded, compiled, and run on
 the client.
+* **Code reuse** - Logic does not have to be independently implemented in both the
+client and server code.  Less code means less development and maintenance costs.
 * **SEO** - Server-side rendering also means that search engine bots see HTML, not
 a blank page.  As a bonus, users who disable Javascript also get to see content.
 
