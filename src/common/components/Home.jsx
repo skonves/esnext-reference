@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class TodoApp extends Component {
+export default class ShortLink extends Component {
 
 	static contextTypes = {
 		store: React.PropTypes.object.isRequired,
@@ -9,10 +9,8 @@ export default class TodoApp extends Component {
 	render() {
 		let nodes = (
 			<div>
-				<h1>Hello World</h1>
-                {this.props.asdf}
-                {this.props.nm}
-				<span>{this.props.message}</span>
+				<h1>Welcome to the NERRd stack</h1>
+				To learn more, read the docs.
 			</div>
 		);
 

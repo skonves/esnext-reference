@@ -45,5 +45,6 @@ Store.
 ## Run this example site?
 1. Get the code by cloning this repo
 1. Install dependencies by running `npm install`
-1. Build and start by runing `npm start`
+1. Build by runing `npm run build`
+1. Start by runing `npm start`
 1. Access the site by navigating to `http://localhost:3000`

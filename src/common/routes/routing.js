@@ -1,11 +1,17 @@
 import React from 'react';
-import { Route } from 'react-router';
-import HelloWorldApp from '../components/HelloWorldApp';
-import ShortLink from '../components/ShortLink';
+import { Route, IndexRoute } from 'react-router';
+import App from '../components/App';
+import Home from '../components/Home';
 import NumberManager from '../components/NumberManager';
+import ShortLink from '../components/ShortLink';
 
 export default (
-  <Route component={HelloWorldApp}>
-	<Route path="/" components={{ asdf: ShortLink, nm: NumberManager }} />
-  </Route>
+	<Route path="/" component={App}>
+		<IndexRoute component={Home} />
+		<Route path="/home" component={Home} />
+		<Route path="/numbers" components={NumberManager} />
+		<Route path="/links" components={ShortLink} >
+			<Route path="/links/:value" components={ShortLink} />
+		</Route>
+	</Route>
 );

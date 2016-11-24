@@ -7,6 +7,7 @@
     "build": "babel src --out-dir .compiled & npm run webpack",
     "clean": "rm -rf .compiled && mkdir .compiled",
     "rebuild": "npm run clean && npm run build",
+	"start": "NODE_ENV=development node ./.compiled/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --optimize-dedupe"
   },

@@ -13,10 +13,10 @@ class NumberManager extends Component {
 			<div>
 				<h1>Number Manager</h1>
 				<span>the number is {this.props.number}</span>
-				<button onClick={()=>this.props.increment()}>increment</button>
-				<button onClick={()=>this.props.decrement()}>decrement</button>
-				<button onClick={()=>this.props.saveNumber(this.props.number)}>save</button>
-				<button onClick={()=>this.props.loadNumber()}>load saved</button>
+				<button onClick={() => this.props.increment()}>increment</button>
+				<button onClick={() => this.props.decrement()}>decrement</button>
+				<button onClick={() => this.props.saveNumber(this.props.number)}>save</button>
+				<button onClick={() => this.props.loadNumber()}>load saved</button>
 				<span>{this.props.message}</span>
 			</div>
 		);
