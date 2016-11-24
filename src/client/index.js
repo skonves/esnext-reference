@@ -8,9 +8,11 @@ import routes from '../common/routes/routing';
 import thunk from 'redux-thunk';
 
 import { createRepository } from '../common/utils/repository';
+import authStrategy from './strategies/auth';
 import numberStrategy from './strategies/numbers';
 
 createRepository({
+	auth: authStrategy,
 	numbers: numberStrategy
 });
 

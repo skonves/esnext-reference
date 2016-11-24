@@ -19,9 +19,11 @@ import thunk from 'redux-thunk';
 import fetchComponentData from '../common/utils/fetchComponentData';
 
 import { createRepository, getRepository } from '../common/utils/repository';
+import authStrategy from './strategies/auth';
 import numberStrategy from './strategies/numbers';
 
 createRepository({
+	auth: authStrategy,
 	numbers: numberStrategy
 });
 
@@ -52,6 +54,34 @@ app.put('/api/number', (req, res) => {
 		.then(value => {
 			setTimeout(() => {
 				res.sendStatus(204);
+			}, 750);
+		})
+		.catch(reason => {
+			res.status(500).send({ reason });
+		});
+});
+
+app.post('/api/login', (req, res) => {
+	const { username } = req.body;
+	getRepository()
+		.auth('login', { username })
+		.then(value => {
+			setTimeout(() => {
+				res.status(200).send(value);
+			}, 750);
+		})
+		.catch(reason => {
+			res.status(500).send({ reason });
+		});
+});
+
+app.post('/api/logout', (req, res) => {
+	const { username } = req.body;
+	getRepository()
+		.auth('logout', { username })
+		.then(value => {
+			setTimeout(() => {
+				res.status(200).send(value);
 			}, 750);
 		})
 		.catch(reason => {

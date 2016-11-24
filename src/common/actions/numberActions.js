@@ -1,5 +1,4 @@
 import actionTypes from '../constants/actionTypes';
-import Action from '../utils/Action';
 
 import { getRepository } from '../utils/repository';
 
