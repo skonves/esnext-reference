@@ -36,7 +36,9 @@ app.get('/api/number', (req, res) => {
 	getRepository()
 		.numbers('load')
 		.then(value => {
-			res.send({ number: value });
+			setTimeout(() => {
+				res.send({ number: value });
+			}, 750);
 		})
 		.catch(reason => {
 			res.status(500).send({ reason });
@@ -48,7 +50,9 @@ app.put('/api/number', (req, res) => {
 	getRepository()
 		.numbers('save', { number })
 		.then(value => {
-			res.sendStatus(204);
+			setTimeout(() => {
+				res.sendStatus(204);
+			}, 750);
 		})
 		.catch(reason => {
 			res.status(500).send({ reason });
@@ -122,7 +126,7 @@ function renderFullPage(html, initialState) {
 		<link rel="shortcut icon" type="image/png" href="assets/images/react.png">
 	  </head>
 	  <body>
-	  <div class="container">${html}</div>
+	  <div id="app">${html}</div>
 		<script>window.$REDUX_STATE = ${initialState}</script>
 		<script src="/dist/bundle.js"></script>
 	  </body>
