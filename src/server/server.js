@@ -18,9 +18,14 @@ import thunk from 'redux-thunk';
 
 import fetchComponentData from '../common/utils/fetchComponentData';
 
-import { createRepository, getRepository } from '../common/utils/repository';
+import { createRepository } from '../common/utils/repository';
 import authStrategy from './strategies/auth';
 import numberStrategy from './strategies/numbers';
+
+import cookieParser from 'cookie-parser';
+
+import { authMiddleware } from './auth';
+console.log(authMiddleware);
 
 createRepository({
 	auth: authStrategy,
@@ -29,70 +34,37 @@ createRepository({
 
 const app = express();
 
+app.use(cookieParser());
 app.use(bodyParser.json());
+
+app.use(authMiddleware({
+	allowAnon: ['/api/login', '/', '/assets.*', '/dist.*']
+}));
 
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 
-app.get('/api/number', (req, res) => {
-	getRepository()
-		.numbers('load')
-		.then(value => {
-			setTimeout(() => {
-				res.send({ number: value });
-			}, 750);
-		})
-		.catch(reason => {
-			res.status(500).send({ reason });
-		});
-});
-
-app.put('/api/number', (req, res) => {
-	const number = req.body.number;
-	getRepository()
-		.numbers('save', { number })
-		.then(value => {
-			setTimeout(() => {
-				res.sendStatus(204);
-			}, 750);
-		})
-		.catch(reason => {
-			res.status(500).send({ reason });
-		});
-});
-
-app.post('/api/login', (req, res) => {
-	const { username } = req.body;
-	getRepository()
-		.auth('login', { username })
-		.then(value => {
-			setTimeout(() => {
-				res.status(200).send(value);
-			}, 750);
-		})
-		.catch(reason => {
-			res.status(500).send({ reason });
-		});
-});
-
-app.post('/api/logout', (req, res) => {
-	const { username } = req.body;
-	getRepository()
-		.auth('logout', { username })
-		.then(value => {
-			setTimeout(() => {
-				res.status(200).send(value);
-			}, 750);
-		})
-		.catch(reason => {
-			res.status(500).send({ reason });
-		});
-});
+import api from './api';
+app.use('/api', api);
 
 // server rendering
 app.use((req, res, next) => {
 
-	const store = createStore(combinedReducers, applyMiddleware(thunk));
+	let initialState = {};
+
+	if (req.user) {
+		console.log('logged in already');
+
+		initialState.auth = {
+			isLoggingIn: false,
+			isLoggingOut: false,
+			isAuthenticated: true,
+			username: req.user.username,
+			avatarUri: req.user.avatarUri
+		};
+	}
+
+	const store = createStore(combinedReducers, initialState, applyMiddleware(thunk));
 
 	// react-router
 	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {

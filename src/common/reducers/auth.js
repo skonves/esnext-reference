@@ -20,7 +20,7 @@ function loggedIn(state, action) {
 		isLoggingIn: false,
 		isAuthenticated: true,
 		username: action.payload.username,
-		avitarUri: action.payload.avitarUri
+		avatarUri: action.payload.avatarUri
 	};
 }
 
@@ -31,11 +31,12 @@ function clearUser(state, action) {
 		isLoggingOut: false,
 		isAuthenticated: false,
 		username: undefined,
-		avitarUri: undefined
+		avatarUri: undefined
 	};
 }
 
 export default function (state = {}, action) {
+	console.log(action.type);
 	switch (action.type) {
 		case actionTypes.LOGIN_REQUEST:
 			return loggingIn(state, action);

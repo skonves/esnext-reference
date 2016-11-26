@@ -1,4 +1,16 @@
-import request from 'superagent';
+import request from '../request';
+
+function getCsrfToken() {
+	return getCookie('csrf_token');
+}
+
+function getCookie(name) {
+	var value = '; ' + document.cookie;
+	var parts = value.split('; ' + name + '=');
+	if (parts.length == 2) {
+		return parts.pop().split(';').shift();
+	}
+}
 
 function saveNumber({ number }) {
 	return new Promise((resolve, reject) => {

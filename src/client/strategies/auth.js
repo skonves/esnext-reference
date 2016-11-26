@@ -1,4 +1,4 @@
-import request from 'superagent';
+import request from '../request';
 
 function login({ username }) {
 	return new Promise((resolve, reject) => {
@@ -7,11 +7,12 @@ function login({ username }) {
 			.send({ username })
 			.end((err, res) => {
 				if (err) {
+					console.log(err);
 					reject(err);
 				} else {
 					resolve({
 						username: res.body.username,
-						avitarUri: res.body.avitarUri
+						avatarUri: res.body.avatarUri
 					});
 				}
 			});

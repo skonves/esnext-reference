@@ -31,12 +31,12 @@ class Login extends Component {
 	}
 
 	render() {
-		const { username, avitarUri, login, isAuthenticated } = this.props;
+		const { username, avatarUri, login, isAuthenticated } = this.props;
 		return (
 			<div>
 				{isAuthenticated ?
 					(<div>
-						<img src={avitarUri} alt={username} />
+						<img src={avatarUri} alt={username} />
 						<span>{username}</span>
 						<button onClick={() => this.handleLogout()}>Logout</button>
 					</div>) :
@@ -61,7 +61,7 @@ class Login extends Component {
 function mapStateToProps({ auth }, ownProps) {
 	return {
 		username: auth.username || 'asdfasdf',
-		avitarUri: auth.avitarUri,
+		avatarUri: auth.avatarUri,
 		isWorking: auth.isLoggingIn || auth.isLoggingOut,
 		isAuthenticated: auth.isAuthenticated,
 	};

@@ -7,12 +7,12 @@ function loginRequest() {
 	};
 }
 
-function loginSuccess({ username, avitarUri }) {
+function loginSuccess({ username, avatarUri }) {
 	return {
 		type: actionTypes.LOGIN_SUCCESS,
 		payload: {
 			username,
-			avitarUri
+			avatarUri
 		}
 	};
 }
@@ -20,28 +20,28 @@ function loginSuccess({ username, avitarUri }) {
 function loginFailed() {
 	return {
 		type: actionTypes.LOGIN_FAILED,
-		payload: { }
+		payload: {}
 	};
 }
 
 function logoutRequest() {
 	return {
 		type: actionTypes.LOGOUT_REQUEST,
-		payload: { }
+		payload: {}
 	};
 }
 
 function logoutSuccess() {
 	return {
 		type: actionTypes.LOGOUT_SUCCESS,
-		payload: { }
+		payload: {}
 	};
 }
 
 function logoutFailed() {
 	return {
 		type: actionTypes.LOGOUT_FAILED,
-		payload: { }
+		payload: {}
 	};
 }
 
@@ -55,6 +55,7 @@ export function login({ username }) {
 				dispatch(loginSuccess(value));
 			})
 			.catch(err => {
+				console.log(err);
 				dispatch(loginFailed());
 			});
 	};
@@ -65,11 +66,12 @@ export function logout() {
 		dispatch(logoutRequest());
 
 		getRepository()
-			.auth('logout', { })
+			.auth('logout', {})
 			.then(value => {
 				dispatch(logoutSuccess());
 			})
 			.catch(err => {
+				console.log(err);
 				dispatch(logoutFailed());
 			});
 	};
