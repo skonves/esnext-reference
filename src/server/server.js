@@ -38,7 +38,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use(authMiddleware({
-	allowAnon: ['/api/login', '/', '/assets.*', '/dist.*']
+	allowAnon: ['/api/login', '/', '/assets.*', '/dist.*'],
+	requireCsrfToken: ['/api/.*']
 }));
 
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')));

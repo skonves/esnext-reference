@@ -5,10 +5,23 @@ const secret = 'jkhr49834hd42f3789h34989f34';
 
 export function authMiddleware(options) {
 	const allowAnon = options.allowAnon || [];
+	const requireCsrfToken = options.requireCsrfToken || [];
 
 	const allow = originalUrl => {
 		for (let i = 0; i < allowAnon.length; i++) {
 			const pattern = '^' + allowAnon[i] + '$';
+
+			if (originalUrl.match(pattern)) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	const csrfRequired = originalUrl => {
+		for (let i = 0; i < requireCsrfToken.length; i++) {
+			const pattern = '^' + requireCsrfToken[i] + '$';
 
 			if (originalUrl.match(pattern)) {
 				return true;
@@ -29,12 +42,8 @@ export function authMiddleware(options) {
 				} else {
 					res.status(403).send({ message: 'missing auth_token cookie.' });
 				}
-			} else if (!csrfToken) {
-				if (allow(req.originalUrl)) {
-					next();
-				} else {
-					res.status(403).send({ message: 'missing X-Csrf-Token header.' });
-				}
+			} else if (!csrfToken && csrfRequired(req.originalUrl)) {
+				res.status(403).send({ message: 'missing X-Csrf-Token header.' });
 			} else {
 				jwt.verify(authToken, secret, function (err, decoded) {
 					if (err) {
@@ -44,15 +53,11 @@ export function authMiddleware(options) {
 							res.status(403).send({ message: 'invalid auth_token cookie.' });
 						}
 					} else {
-						if (decoded.csrfToken === csrfToken) {
+						if (decoded.csrfToken !== csrfToken && csrfRequired(req.originalUrl)){
+							res.status(403).send({ message: 'X-Csrf-Token header does not match auth_token cookie.' });
+						} else {
 							req.user = decoded;
 							next();
-						} else {
-							if (allow(req.originalUrl)) {
-								next();
-							} else {
-								res.status(403).send({ message: 'X-Csrf-Token header does not match auth_token cookie.' });
-							}
 						}
 					}
 				});
