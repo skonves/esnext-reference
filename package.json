@@ -1,7 +1,7 @@
 {
   "name": "esnext-reference",
   "version": "1.0.0",
-  "description": "Reference projects for ES7/8+ code",
+  "description": "Reference projects for ES6/7 code",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./src ./tests",
