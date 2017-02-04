@@ -4,8 +4,10 @@
   "description": "Reference projects for ES7/8+ code",
   "main": "index.js",
   "scripts": {
-    "compile": "rm -rf .compiled && mkdir .compiled && babel src --out-dir .compiled",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "recompile": "npm run clean && npm run compile",
+    "clean": "rm -rf .compiled && mkdir -p .compiled/src && mkdir -p .compiled/tests",
+    "compile": "babel src --out-dir .compiled/src && babel tests --out-dir .compiled/tests",
+    "test": "npm run recompile && mocha --require source-map-support/register ./.compiled/tests"
   },
   "author": "Steve Konves",
   "license": "MIT",
@@ -17,8 +19,10 @@
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "^6.16.0",
+    "chai": "^3.5.0",
     "eslint": "^3.9.1",
-    "eslint-plugin-babel": "^3.3.0"
+    "eslint-plugin-babel": "^3.3.0",
+    "mocha": "^3.2.0",
     "source-map-support": "^0.4.11"
   }
 }

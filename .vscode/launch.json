@@ -8,11 +8,11 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/.compiled/app.js",
+            "program": "${workspaceRoot}/.compiled/src/app.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "compile",
+            "preLaunchTask": "recompile",
             "runtimeExecutable": null,
             "runtimeArgs": ["--nolazy"],
             "env": {
@@ -20,7 +20,25 @@
             },
             "console": "internalConsole",
             "sourceMaps": true,
-            "outDir": "${workspaceRoot}/.compiled"
+            "outDir": "${workspaceRoot}/.compiled/src"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Tests",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "stopOnEntry": false,
+            "args": ["--require", "source-map-support/register", "./.compiled/tests"],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": "recompile",
+            "runtimeExecutable": null,
+            "runtimeArgs": ["--nolazy"],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/.compiled/tests"
         },
         {
             "type": "node",
