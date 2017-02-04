@@ -4,6 +4,8 @@
   "description": "Reference projects for ES7/8+ code",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src ./tests",
+    "lintfix": "eslint --fix ./src ./tests",
     "recompile": "npm run clean && npm run compile",
     "clean": "rm -rf .compiled && mkdir -p .compiled/src && mkdir -p .compiled/tests",
     "compile": "babel src --out-dir .compiled/src && babel tests --out-dir .compiled/tests",
