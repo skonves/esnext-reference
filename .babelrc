@@ -7,5 +7,12 @@
         "transform-es2015-destructuring",
 		"transform-runtime"
     ],
-    "sourceMaps": "inline"
+    "sourceMaps": "inline",
+	"env": {
+		"test": {
+			"plugins": [
+				"istanbul"
+			]
+		}
+	}
 }
